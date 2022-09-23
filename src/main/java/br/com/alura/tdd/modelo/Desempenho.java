@@ -20,6 +20,12 @@ public enum Desempenho {
 		public BigDecimal pegaReajusteSalarial() {
 			return new BigDecimal("0.2");
 		}
+	},
+	EXCEPCIONAL {
+		@Override
+		public BigDecimal pegaReajusteSalarial() {
+			return new BigDecimal("0.4");
+		}
 	};
 	
 	public abstract BigDecimal pegaReajusteSalarial();

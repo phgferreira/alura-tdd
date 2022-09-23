@@ -13,7 +13,7 @@ import br.com.alura.tdd.modelo.Funcionario;
 class ReajusteServiceTest {
 
 	@Test
-	void reajusteDeveriaSerDeTresPorcentoQuandoDesempenhoForADesejar() {
+	void reajusteDeveSerDeTresPorcentoQuandoDesempenhoForADesejar() {
 		ReajusteService service = new ReajusteService();
 		Funcionario funcionario = new Funcionario("Fulano de Tal", LocalDate.now(), new BigDecimal("1000"));
 		service.concederReajuste(funcionario, Desempenho.A_DESEJAR);
@@ -22,7 +22,7 @@ class ReajusteServiceTest {
 	}
 	
 	@Test
-	void reajusteDeveriaSerDeQuinzePorcentoQuandoDesempenhoForBom() {
+	void reajusteDeveSerDeQuinzePorcentoQuandoDesempenhoForBom() {
 		ReajusteService service = new ReajusteService();
 		Funcionario funcionario = new Funcionario("Fulano de Tal", LocalDate.now(), new BigDecimal("1000"));
 		service.concederReajuste(funcionario, Desempenho.BOM);
@@ -31,7 +31,16 @@ class ReajusteServiceTest {
 	}
 
 	@Test
-	void reajusteDeveriaSerDeVintePorcentoQuandoDesempenhoForOtimo() {
+	void reajusteDeveSerDeVintePorcentoQuandoDesempenhoForOtimo() {
+		ReajusteService service = new ReajusteService();
+		Funcionario funcionario = new Funcionario("Fulano de Tal", LocalDate.now(), new BigDecimal("1000"));
+		service.concederReajuste(funcionario, Desempenho.OTIMO);
+		
+		assertEquals(new BigDecimal("1200.00"), funcionario.getSalario());
+	}
+
+	@Test
+	void reajusteDeveSerDeQuarentaPorcentoQuandoDesempenhoForExceptional() {
 		ReajusteService service = new ReajusteService();
 		Funcionario funcionario = new Funcionario("Fulano de Tal", LocalDate.now(), new BigDecimal("1000"));
 		service.concederReajuste(funcionario, Desempenho.OTIMO);
