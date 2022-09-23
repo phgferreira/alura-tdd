@@ -2,6 +2,7 @@ package br.com.alura.tdd.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +18,15 @@ class BonusServiceTest {
 		BonusService servico = new BonusService();
 		Funcionario funcionario = new Funcionario("Fulano de Tal", LocalDate.now(), new BigDecimal("25000"));
 		
-		assertThrows( IllegalArgumentException.class, () -> servico.calcularBonus(funcionario) );
+		//assertThrows( IllegalArgumentException.class, () -> servico.calcularBonus(funcionario) );
+		
+		// Dessa segunda forma estamos indo um pouco além e verificando também a mensagem da excessão
+		try {
+			servico.calcularBonus(funcionario);
+			fail("Não entrou no catch");
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Funcionário com salário maior que R$10.000 não pode receber o bônus");
+		}
 
 	}
 	
